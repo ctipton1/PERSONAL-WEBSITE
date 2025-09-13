@@ -1,0 +1,920 @@
+/* ================================
+   Font (ChatGPT-style: Inter)
+================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+
+:root{
+  --bg:#f3f4f6;
+  --panel:#ffffff;
+  --ink:#2b2b2b;
+  --muted:#e5e7eb;
+  --line:rgba(0,0,0,.14); 
+  --accent:#2f6f4e;
+  --btn:#1f2937;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;  /* 4px  */
+  --space-2: 0.5rem;   /* 8px  */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.5rem;   /* 24px */
+  --space-6: 2rem;     /* 32px */
+  --space-7: 3rem;     /* 48px */
+  --space-8: 4rem;     /* 64px */
+
+  --radius:16px;
+  --maxw:1100px;
+}
+
+
+/* Dark theme: apply when <html data-theme="dark"> */
+html[data-theme="dark"]{
+  --bg:#0f1720;
+  --panel:#111827;
+  --ink:#e5e7eb;
+  --muted:#1f2937;
+  --line:rgba(255,255,255,.18); /* ↑ clearer borders in dark mode */
+  --accent:#7dd3a7;
+  --btn:#e5e7eb;
+}
+
+
+/* ================================
+   Reset-ish + Base Typography
+================================== */
+*{ box-sizing:border-box }
+html,body{ height:100% }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  line-height:1.6;
+}
+
+h1,h2,h3,h4{
+  font-weight:700;
+  letter-spacing:.2px;
+  margin:0 0 .5rem;
+}
+
+p{ margin:.5rem 0 1rem }
+
+img{
+  max-width:100%;
+  display:block;
+  border-radius:12px;
+}
+
+
+/* ================================
+   Layout Helpers
+================================== */
+.container{ max-width:var(--maxw); margin:0 auto; padding:2rem 1rem }
+
+/* Section padding (top & bottom) on any major page block */
+.section{ padding-block: var(--space-8); }
+
+/* Vertical rhythm: give consistent gaps between children */
+.stack > * + *{ margin-top: var(--space-5); }
+
+.site-header{
+  position:sticky; top:0; z-index:10;
+  background: rgba(255, 255, 255, 0.2);  /* white with 20% opacity */
+  backdrop-filter: blur(6px);            /* optional: glassy look */
+  border-bottom: 1px solid var(--line);
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between;
+  padding:.8rem 1rem;
+}
+
+
+/* ================================
+   Header / Navigation
+================================== */
+.logo{
+  font-weight:700;
+  letter-spacing:.3px;
+  color:var(--ink);
+  text-decoration:none;
+}
+
+.nav{
+  display:flex;
+  gap:1rem;
+}
+
+.nav a{
+  padding:.4rem .7rem;
+  border-radius:10px;
+  text-decoration:none;
+  color:var(--ink);
+  font-weight:400;                 /* normal weight by default */
+}
+
+.nav a:hover{
+  background:var(--muted);         /* soft gray hover background */
+}
+
+/* Keyboard focus ring */
+.nav a:focus-visible {
+  background: color-mix(in oklab, var(--muted) 60%, white);
+  text-decoration: none;
+}
+
+
+/* UPDATED: active link is bold instead of underlined */
+.nav a.active{
+  font-weight:700;                 /* bold text for active page */
+  background:transparent;          /* keep background clean */
+  color:var(--btn);                /* match your button color */
+}
+
+.nav-toggle{
+  display:none;
+  font-size:1.2rem;
+  background:none;
+  border:1px solid var(--line);
+  padding:.2rem .5rem;
+  border-radius:8px;
+}
+
+
+.hero{
+  background:transparent;
+  border:0;
+  border-radius:0;
+  padding:3rem 1.25rem;
+  box-shadow:none;
+
+  margin-top: var(--space-8);   /* consistent with global scale */
+  text-align:center;
+}
+
+
+.hero .intro{
+  margin-top:0;      /* no extra push inside */
+}
+
+
+.hero h1{ font-size:clamp(2rem,5vw,3rem) }
+.sub{ opacity:.9 }
+.cta-row{ display:flex; gap:.75rem; margin-top:1rem }
+
+/* === Hero intro layout (updated) === */
+.hero .intro{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  margin-top:0;    /* REMOVED push-down since flex is handling it */
+}
+
+.hero .intro .btn{
+  margin-top:1.5rem;   /* space above resume button */
+}
+
+.hero .headshot{
+  width:160px;
+  border-radius:50%;
+  margin-bottom:1rem;
+  object-fit:cover;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+  border:4px solid var(--panel);         /* adapts to theme */
+}
+
+
+.hero .social-links{
+  margin:0.5rem 0 1rem;
+  display:flex;
+  gap:0.75rem;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1rem;
+  box-shadow:0 6px 20px rgba(0,0,0,.06); /* a touch more visible in light */
+}
+
+/* Dark theme shadow tune */
+html[data-theme="dark"] .card{
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+
+
+.btn{
+  display:inline-block;
+  padding:.7rem 1rem;
+  background: var(--btn);
+  border:1px solid var(--btn);
+  border-radius:12px;
+  text-decoration:none;
+  cursor:pointer;
+  font-weight:600;
+  color:#fff; /* default: works when --btn is dark (light theme) */
+}
+
+/* Token-aware hover darken */
+.btn:hover{
+  background: color-mix(in oklab, var(--btn) 85%, black);
+  color:#fff;
+}
+
+/* Ensure readable text when --btn is light in dark mode */
+html[data-theme="dark"] .btn{
+  color:#111; /* high contrast on the light button */
+}
+
+/* Fallback if color-mix is unsupported */
+@supports not (color-mix(in oklab, red 50%, white)) {
+  .btn:hover{ background:#111; }
+}
+
+
+/* Focus state */
+.btn:focus-visible,
+.btn-icon:focus-visible,
+#timeline-mount .xp-scope .button:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--btn) 40%, white);
+  outline: none;
+}
+
+/* === Icon-only button variant === */
+.btn-icon{
+  width:40px;
+  height:40px;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.2rem;
+}
+
+/* === Theme toggle icon visibility === */
+#theme-toggle .icon-sun { display:none; }   /* hidden by default (light mode) */
+html[data-theme="dark"] #theme-toggle .icon-moon { display:none; }
+html[data-theme="dark"] #theme-toggle .icon-sun  { display:inline; }
+
+
+/* UPDATED: links now use --btn instead of --accent */
+.text-link{
+  color:var(--btn);
+  text-decoration:none;
+  font-weight:600;
+}
+
+.text-link:hover{ color:var(--btn); text-decoration:underline }
+
+/* Focus state */
+.text-link:focus-visible {
+  text-decoration: underline;
+}
+
+/* ================================
+   Forms
+================================== */
+.form{ display:grid; gap:1rem }
+label span{ display:block; font-weight:600; margin-bottom:.25rem }
+input,textarea{
+  width:100%;
+  padding:.7rem .8rem;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background: var(--panel);
+  color: var(--ink);
+}
+
+
+/* Focus state */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--btn) 35%, white);
+  border-color: color-mix(in oklab, var(--btn) 55%, black);
+}
+
+
+
+/* ================================
+   Grids
+================================== */
+.grid{ display:grid; gap:1rem; margin:1.25rem 0 }
+.grid.two{ grid-template-columns:repeat(2,minmax(0,1fr)) }
+.grid.three{ grid-template-columns:repeat(3,minmax(0,1fr)) }
+
+
+/* ================================
+   Portfolio & Certificates
+================================== */
+.project h3{ margin-top:.6rem }
+.cert{
+  display:grid;
+  grid-template-columns:72px 1fr;
+  gap:1rem;
+  align-items:center;
+}
+
+
+/* ================================
+   Responsive (Mobile)
+================================== */
+@media (max-width: 860px){
+  .grid.two{ grid-template-columns:1fr }
+  .grid.three{ grid-template-columns:1fr }
+  .nav{ display:none }
+  .nav.open{
+    display:flex; flex-direction:column;
+    position:absolute; right:1rem; top:3.2rem;
+    background:var(--panel);
+    padding:.6rem;
+    border:1px solid var(--line);
+    border-radius:12px;
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+  }
+  .nav-toggle{ display:inline-block }
+}
+
+
+/* ===== Contact Section (separate spacing/look) ===== */
+.contact-section {
+  margin-top: 3rem;
+  padding: 9rem 1.5rem 5rem;           
+  display: block;
+  text-align: center;
+}
+
+.contact-section .section-title {
+  font-size: 2.5rem;
+  margin: 0 auto 1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.contact-section .form {
+  max-width: 640px;
+  margin: 2rem auto 0;
+  display: grid;      /* added once here */
+  gap: 1rem;          /* spacing between form elements */
+}
+
+.contact-section .form label { 
+  display: grid; 
+  gap: .5rem; 
+  text-align: left; 
+}
+
+.contact-section .form input,
+.contact-section .form textarea { 
+  width: 100%; 
+  margin: 0;          /* normalize */
+}
+
+.contact-section .form button { 
+  margin: 0;          /* normalize */
+}
+
+/* 1) Timeline lists: scope styles so they don't touch the contact form */
+.xp-timeline ul.description { 
+  margin: .5rem 0 0; 
+  padding-left: 1.25rem; 
+  list-style: disc;
+}
+.xp-timeline ul.description li { 
+  margin: .25rem 0; 
+}
+
+
+/* ===== About Page ===== */
+.about-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 7rem 1.5rem 5rem; /* same breathing room as profile/hero */
+}
+
+.about-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2.5rem;
+  font-weight: 700;
+}
+
+.about-card {
+  max-width: 900px;
+  padding: 3rem;
+  margin: 0 auto;
+   font-size: 1.125rem; /* ~18px (was default ~16px) */
+  line-height: 1.7; 
+}
+
+
+/* ===== Skills Grid ===== */
+.skills-section {
+  margin-top: 4rem;
+  padding: 9rem 1.5rem 5rem;
+  text-align: center;
+}
+
+.skills-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.skills-grid {
+  --card-bg: var(--panel, rgba(0,0,0,0)); /* transparent by default */
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .skills-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 960px) {
+  .skills-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.skill {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.25rem 1rem;
+  display: grid;
+  place-items: center;
+  gap: .5rem;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  will-change: transform;
+}
+
+.skill i {
+  font-size: 2rem;            /* icon size */
+  line-height: 1;
+}
+.skill span {
+  font-weight: 600;
+  font-size: .95rem;
+}
+
+.skill:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 10px 26px rgba(0,0,0,.12);
+  border-color: color-mix(in oklab, var(--line) 60%, var(--ink));
+}
+
+/* Fallback if color-mix unsupported */
+@supports not (color-mix(in oklab, red 50%, white)) {
+  .skill:hover { border-color: #9aa2af; }
+}
+
+/* Dark mode tweak (if you use prefers-color-scheme) */
+@media (prefers-color-scheme: dark) {
+  .skill { 
+    border-color: rgba(255,255,255,.1);
+    background: rgba(255,255,255,.03);
+  }
+  .skill:hover {
+    box-shadow: 0 10px 26px rgba(0,0,0,.35);
+    border-color: rgba(255,255,255,.18);
+  }
+}
+
+/* ===== Skills: brand + icon handling ===== */
+.skill {
+  --icon-size: 28px;
+  --ring: color-mix(in oklab, var(--line) 65%, transparent);
+}
+
+/* Brand logos */
+.skill img.brand-icon{
+  width: var(--icon-size);
+  height: var(--icon-size);
+  object-fit: contain;
+  display: block;
+}
+
+/* Generic icon (Bootstrap Icons) */
+.skill i.bi{
+  font-size: calc(var(--icon-size) + 2px);
+  line-height: 1;
+}
+
+/* Subtle hover polish for desktop only */
+@media (hover:hover){
+  .skill:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.12);
+    border-color: color-mix(in oklab, var(--btn) 22%, var(--line));
+  }
+}
+
+/* Optional tiny caption under the skill label */
+.skill small {
+  display:block;
+  font-weight:500;
+  opacity:.7;
+  font-size:.8rem;
+  margin-top:-.1rem;
+}
+
+
+/* =====  Experience section ===== */
+.experience-section {
+  margin-top: 6rem;           /* clear space from Hero */
+  padding: 7rem 1.5rem 5rem;
+}
+
+.experience-section .section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 0 auto 2rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.xp-cards {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+/* 2 columns on medium+, 1 on mobile */
+@media (min-width: 900px) {
+  .xp-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.xp-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,.06);
+}
+
+html[data-theme="dark"] .xp-card {
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+
+.xp-card header {
+  display: grid;
+  gap: .25rem;
+  margin-bottom: .75rem;
+}
+
+.xp-card h3 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.xp-dates {
+  font-size: .9rem;
+  color: color-mix(in oklab, var(--ink) 70%, transparent);
+}
+
+/* ================================
+   Experience Cards — Executive Look
+   (no HTML changes needed)
+================================ */
+.xp-card{
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 2px);
+  padding: 1.25rem 1.25rem 1.1rem 1.25rem;
+  box-shadow: 0 10px 28px rgba(0,0,0,.08);
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+
+/* Accent rail, subtle gradient */
+.xp-card::before{
+  content:"";
+  position:absolute;
+  left:-1px;
+  top:12px; bottom:12px;
+  width:4px;
+  border-radius: 6px;
+  background: linear-gradient(180deg,
+    color-mix(in oklab, var(--btn) 70%, white),
+    color-mix(in oklab, var(--btn) 30%, transparent)
+  );
+}
+
+/* Header & meta */
+.xp-card header{
+  display:grid;
+  gap:.2rem;
+  padding-bottom:.75rem;
+  border-bottom: 1px dashed color-mix(in oklab, var(--line) 70%, transparent);
+}
+.xp-card h3{
+  margin:0;
+  font-size: 1.18rem;
+  letter-spacing:.2px;
+  line-height:1.2;
+}
+.xp-dates{
+  font-size:.92rem;
+  letter-spacing:.2px;
+  color: color-mix(in oklab, var(--ink) 70%, transparent);
+  opacity:.95;
+}
+
+/* Professional bullets (dot with subtle ring) */
+.xp-bullets{
+  margin:.9rem 0 0;
+  padding-left:0;
+  list-style:none;
+}
+.xp-bullets li{
+  position:relative;
+  padding:.42rem 0 .42rem 1.25rem;
+}
+.xp-bullets li::before{
+  content:"";
+  position:absolute;
+  left:0; top: calc(.42rem + .35rem);
+  width:6px; height:6px;
+  border-radius:50%;
+  background: color-mix(in oklab, var(--btn) 85%, white);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--btn) 18%, transparent);
+}
+
+/* Optional hover (desktop only) */
+@media (hover:hover){
+  .xp-card:hover,
+  .xp-card:focus-within{
+    transform: translateY(-6px);
+    border-color: color-mix(in oklab, var(--btn) 35%, var(--line));
+    box-shadow: 0 18px 44px rgba(0,0,0,.14);
+  }
+}
+
+/* “CURRENT” pill for ongoing roles (JS adds .current) */
+.xp-card.current::after{
+  content:"CURRENT";
+  position:absolute; top:10px; right:12px;
+  font-size:.7rem; font-weight:700;
+  letter-spacing:.6px;
+  padding:.2rem .4rem;
+  border-radius:999px;
+  background: color-mix(in oklab, var(--btn) 88%, white);
+  color: #fff;
+}
+
+/* ===== Timeline layout — single column + dotted spine (FINAL) ===== */
+.xp-cards.timeline{
+  position: relative;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr !important; /* force single column on all widths */
+}
+
+/* Dotted vertical spine */
+.xp-cards.timeline::before{
+  content:"";
+  position:absolute; left:18px; top:0; bottom:0; width:2px;
+  background:
+    radial-gradient(
+      color-mix(in oklab, var(--ink) 35%, transparent) 2px,
+      transparent 2.5px
+    ) 50% 0 / 2px 16px repeat-y;
+}
+
+/* Card adjustments for timeline mode */
+.xp-cards.timeline .xp-card{
+  padding-left: 2.5rem;           /* make room for spine + node */
+}
+
+/* Hide card’s own accent rail so we don’t double up */
+.xp-cards.timeline .xp-card::before{
+  display:none;
+}
+
+/* Node marker on each card (sits on the spine) */
+.xp-cards.timeline .xp-card::after{
+  content:"";
+  position:absolute; left: 11px; top: 22px;
+  width:14px; height:14px; border-radius:50%;
+  background: var(--panel);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--btn) 80%, black);
+}
+
+/* Dark mode: slightly stronger dots */
+html[data-theme="dark"] .xp-cards.timeline::before{
+  background:
+    radial-gradient(
+      color-mix(in oklab, var(--ink) 55%, transparent) 2px,
+      transparent 2.5px
+    ) 50% 0 / 2px 16px repeat-y;
+}
+
+
+/* Dark mode tune */
+html[data-theme="dark"] .xp-card{ box-shadow: 0 12px 32px rgba(0, 6, 15, 0.45); }
+
+
+/* Reset: remove outlines unless it's keyboard nav */
+:focus { outline: none; }
+
+/* Default focus ring for keyboard users */
+:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--btn) 80%, white);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Nav links */
+.nav a:focus-visible {
+  background: color-mix(in oklab, var(--muted) 60%, white);
+  text-decoration: none;
+}
+
+/* Buttons (regular, icon, timeline) */
+.btn:focus-visible,
+.btn-icon:focus-visible,
+#timeline-mount .xp-scope .button:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--btn) 40%, white);
+  outline: none;
+}
+
+/* Text links in copy */
+.text-link:focus-visible {
+  text-decoration: underline;
+}
+
+/* Form fields */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--btn) 35%, white);
+  border-color: color-mix(in oklab, var(--btn) 55%, black);
+}
+
+/* Fallback for browsers without color-mix support */
+@supports not (color-mix(in oklab, red 50%, white)) {
+  :focus-visible { outline-color: #2563eb; }
+  .btn:focus-visible,
+  .btn-icon:focus-visible,
+  #timeline-mount .xp-scope .button:focus-visible {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.4);
+  }
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.35);
+    border-color: #2563eb;
+  }
+}
+
+
+/* Keep anchored sections from hiding under sticky header */
+:root { --header-h: 64px; } /* will be updated by JS to real height */
+section[id] { scroll-margin-top: calc(var(--header-h) + 16px); }
+html { scroll-behavior: smooth; } /* smooth jump for anchor-like scrolls */
+
+
+.xp-bullets {
+  margin: 0.25rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.xp-bullets li { margin: .25rem 0; }
+
+
+/* ===== Skills — Capsule Badges (elegant, logo-first) ===== */
+.skills-grid.capsules{
+  display:flex; flex-wrap:wrap;
+  gap:.6rem .6rem;
+  max-width:980px; margin:0 auto;
+}
+
+.capsule{
+  display:flex; align-items:center; gap:.6rem;
+  padding:.55rem .85rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background-color .18s ease;
+}
+
+.capsule img.brand-icon{
+  width:18px; height:18px; object-fit:contain;
+  display:block;
+  filter: grayscale(1) contrast(1.05) opacity(.9);
+}
+
+.capsule .label{
+  font-weight:600; font-size:.92rem; line-height:1.2;
+}
+
+/* Hover: subtle lift + colorize logos (desktop only) */
+@media (hover:hover){
+  .capsule:hover{
+    transform: translateY(-2px);
+    border-color: color-mix(in oklab, var(--btn) 24%, var(--line));
+    box-shadow: 0 10px 24px rgba(0,0,0,.10);
+    background: color-mix(in oklab, var(--panel) 92%, var(--btn));
+  }
+  .capsule:hover img.brand-icon{ filter:none; opacity:1; }
+}
+
+/* Focus ring for keyboard users */
+.capsule:focus-visible{
+  outline: 2px solid color-mix(in oklab, var(--btn) 80%, white);
+  outline-offset: 2px;
+}
+
+/* Compact & roomy density toggles (optional) */
+.skills-grid.capsules.compact .capsule{ padding:.45rem .7rem; gap:.5rem }
+.skills-grid.capsules.roomy .capsule{ padding:.68rem 1rem }
+
+/* Dark mode polish */
+html[data-theme="dark"] .capsule{
+  box-shadow: 0 10px 26px rgba(0,0,0,.35);
+}
+html[data-theme="dark"] .capsule:hover{
+  background: color-mix(in oklab, var(--panel) 85%, var(--btn));
+}
+
+/* Motion safety */
+@media (prefers-reduced-motion: reduce){
+  .capsule{ transition: none; }
+}
+
+/* Center the capsule grid rows */
+.skills-grid.capsules{
+  justify-content: center;              /* centers items on each wrapped row */
+}
+
+/* ===== Capsule shape: TICKET (side notches) ===== */
+.skills-grid.capsules.ticket .capsule{
+  --notch: 12px;                        /* notch radius; try 10–16px */
+  border: none;                         /* we'll simulate the border with inset shadow */
+  border-radius: 16px;
+
+  /* Rectangle with two circular cut-outs using mask (cross-browser) */
+  -webkit-mask:
+    radial-gradient(var(--notch) at left 50%, transparent 98%, #000 99%) 0/50% 100% no-repeat,
+    radial-gradient(var(--notch) at right 50%, transparent 98%, #000 99%) 100%/50% 100% no-repeat,
+    linear-gradient(#000 0 0);
+  mask:
+    radial-gradient(var(--notch) at left 50%, transparent 98%, #000 99%) 0/50% 100% no-repeat,
+    radial-gradient(var(--notch) at right 50%, transparent 98%, #000 99%) 100%/50% 100% no-repeat,
+    linear-gradient(#000 0 0);
+
+  /* Simulated border + your soft drop shadow */
+  box-shadow:
+    0 0 0 1px var(--line) inset,
+    0 6px 18px rgba(0,0,0,.06);
+
+  /* Extra padding so text doesn’t collide with notches */
+  padding-left: calc(.85rem + var(--notch));
+  padding-right: calc(.85rem + var(--notch));
+}
+
+/* Hover (elegant): keep your lift & color, adjust inset “border” color */
+@media (hover:hover){
+  .skills-grid.capsules.ticket .capsule:hover{
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--btn) 24%, var(--line)) inset,
+      0 10px 24px rgba(0,0,0,.10);
+  }
+}
+
+/* Optional: per-item escape hatch (use .no-notch on a single capsule) */
+.skills-grid.capsules.ticket .capsule.no-notch{
+  -webkit-mask: none; mask: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  border: 1px solid var(--line);
+  padding-left: .85rem; padding-right: .85rem;
+}
+
+
+
+
+.hero .hero-blurb{
+  max-width: 38ch;          /* tighten or loosen: 34–48ch */
+  margin: .75rem auto 0;    /* centered block */
+  line-height: 1.7;
+  text-align: justify;      /* even edges */
+  text-justify: inter-word; /* better word spacing */
+  hyphens: auto;            /* allow hyphen breaks */
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+}
+
+
+
