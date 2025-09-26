@@ -72,9 +72,8 @@ img{
 /* ================================
    Layout Helpers
 ================================== */
-.container{ max-width:var(--maxw); margin:0 auto; padding:2rem 1rem }
+/* (removed legacy .container with vertical padding) */
 
-/* Section padding (top & bottom) on any major page block */
 .section{ padding-block: var(--space-8); }
 
 /* Vertical rhythm: give consistent gaps between children */
@@ -143,50 +142,60 @@ img{
 }
 
 
+/* ===== Hero (centered, tidy, responsive) ===== */
 .hero{
-  background:transparent;
-  border:0;
-  border-radius:0;
-  padding:3rem 1.25rem;
-  box-shadow:none;
-
-  margin-top: var(--space-8);   /* consistent with global scale */
-  text-align:center;
+  /* removed manual margin-top to use global spacing system */
+  padding: 3rem 1.25rem;
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+  border-radius: 0;
 }
-
 
 .hero .intro{
-  margin-top:0;      /* no extra push inside */
+  /* consolidate duplicate rules */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 0;
+  max-width: 900px;
+  margin-inline: auto;
 }
 
-
-.hero h1{ font-size:clamp(2rem,5vw,3rem) }
-.sub{ opacity:.9 }
-.cta-row{ display:flex; gap:.75rem; margin-top:1rem }
-
-/* === Hero intro layout (updated) === */
-.hero .intro{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  margin-top:0;    /* REMOVED push-down since flex is handling it */
+.hero h1{
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  line-height: 1.15;
+  margin: 0 0 .5rem 0;
 }
 
-.hero .intro .btn{
-  margin-top:1.5rem;   /* space above resume button */
+.hero .sub{
+  opacity: .9;
+  max-width: 60ch;
+  margin: 0 0 1rem 0;
 }
 
 .hero .headshot{
-  width:160px;
-  border-radius:50%;
-  margin-bottom:1rem;
-  object-fit:cover;
-  box-shadow:0 4px 12px rgba(0,0,0,.15);
-  border:4px solid var(--panel);         /* adapts to theme */
+  width: 160px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  border: 4px solid var(--panel, #fff);
 }
 
+.hero .social-links{
+  margin: .5rem 0 1rem;
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 1.05rem;     /* ~16.8px (+5%) */
+  line-height: 1.3;
+}
 
+/* —— Keep your original social links exactly as is —— */
 .hero .social-links{
   margin:0.5rem 0 1rem;
   display:flex;
@@ -194,6 +203,31 @@ img{
   flex-wrap:wrap;
   justify-content:center;
 }
+
+.hero .intro .btn{
+  margin-top: 1.5rem; /* space above resume button */
+}
+
+.cta-row{
+  display: flex;
+  gap: .75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;          /* prevents overflow on small screens */
+  justify-content: center;  /* keeps buttons centered */
+}
+
+/* Small-screen refinements */
+@media (max-width: 480px){
+  .hero{ padding: 2.25rem 1rem; }
+  .hero .headshot{ width: 128px; }
+  .cta-row{ gap: .6rem; }
+}
+
+/* Motion respect (optional) */
+@media (prefers-reduced-motion: reduce){
+  .hero .social-links a{ transition: none; }
+}
+
 
 
 .card{
@@ -344,9 +378,8 @@ select:focus-visible {
 
 
 /* ===== Contact Section (separate spacing/look) ===== */
+/* removed margin-top and big padding to defer to global spacing */
 .contact-section {
-  margin-top: 3rem;
-  padding: 9rem 1.5rem 5rem;           
   display: block;
   text-align: center;
 }
@@ -393,11 +426,11 @@ select:focus-visible {
 
 
 /* ===== About Page ===== */
+/* removed page-level padding to defer to global spacing */
 .about-page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 7rem 1.5rem 5rem; /* same breathing room as profile/hero */
 }
 
 .about-title {
@@ -417,9 +450,9 @@ select:focus-visible {
 
 
 /* ===== Skills Grid ===== */
+/* removed big section padding to defer to global spacing */
 .skills-section {
   margin-top: 4rem;
-  padding: 9rem 1.5rem 5rem;
   text-align: center;
 }
 
@@ -528,188 +561,139 @@ select:focus-visible {
 }
 
 
-/* =====  Experience section ===== */
-.experience-section {
-  margin-top: 6rem;           /* clear space from Hero */
-  padding: 7rem 1.5rem 5rem;
+/* ================================
+   Experience — Timeline Cards
+   (clean, modern, accessible)
+================================ */
+.xp-section{
+  margin-top: 6rem;
+  padding: 3.5rem 1.25rem 4rem;
 }
 
-.experience-section .section-title {
+.xp-title{
   text-align: center;
-  font-size: 2.5rem;
-  margin: 0 auto 2rem;
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
   font-weight: 700;
+  margin: 0 auto 2rem;
   color: var(--ink);
 }
 
-.xp-cards {
+/* Timeline scaffold */
+.xp-timeline{
   list-style: none;
+  margin: 0;
   padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 1rem;
-}
-
-/* 2 columns on medium+, 1 on mobile */
-@media (min-width: 900px) {
-  .xp-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-.xp-card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 1.25rem;
-  box-shadow: 0 6px 20px rgba(0,0,0,.06);
-}
-
-html[data-theme="dark"] .xp-card {
-  box-shadow: 0 8px 24px rgba(0,0,0,.35);
-}
-
-.xp-card header {
-  display: grid;
-  gap: .25rem;
-  margin-bottom: .75rem;
-}
-
-.xp-card h3 {
-  margin: 0;
-  font-size: 1.125rem;
-}
-
-.xp-dates {
-  font-size: .9rem;
-  color: color-mix(in oklab, var(--ink) 70%, transparent);
-}
-
-/* ================================
-   Experience Cards — Executive Look
-   (no HTML changes needed)
-================================ */
-.xp-card{
   position: relative;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: calc(var(--radius) + 2px);
-  padding: 1.25rem 1.25rem 1.1rem 1.25rem;
-  box-shadow: 0 10px 28px rgba(0,0,0,.08);
-  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+  display: grid;
+  gap: 1.15rem;
 }
 
-/* Accent rail, subtle gradient */
-.xp-card::before{
-  content:"";
-  position:absolute;
-  left:-1px;
-  top:12px; bottom:12px;
-  width:4px;
-  border-radius: 6px;
-  background: linear-gradient(180deg,
-    color-mix(in oklab, var(--btn) 70%, white),
-    color-mix(in oklab, var(--btn) 30%, transparent)
-  );
+/* Vertical spine */
+.xp-timeline::before{
+  content: "";
+  position: absolute;
+  left: 22px; top: 0; bottom: 0;
+  width: 2px;
+  background:
+    radial-gradient(color-mix(in oklab, var(--ink) 35%, transparent) 2px, transparent 3px)
+    0 0 / 2px 16px repeat-y;
+  opacity: .6;
 }
 
-/* Header & meta */
-.xp-card header{
-  display:grid;
-  gap:.2rem;
-  padding-bottom:.75rem;
-  border-bottom: 1px dashed color-mix(in oklab, var(--line) 70%, transparent);
-}
-.xp-card h3{
-  margin:0;
-  font-size: 1.18rem;
-  letter-spacing:.2px;
-  line-height:1.2;
-}
-.xp-dates{
-  font-size:.92rem;
-  letter-spacing:.2px;
-  color: color-mix(in oklab, var(--ink) 70%, transparent);
-  opacity:.95;
+/* Card */
+.xp-item{
+  position: relative;
+  background: var(--panel, #fff);
+  border: 1px solid var(--line, rgba(0,0,0,.14));
+  border-radius: 16px;
+  padding: 1.1rem 1.1rem 1rem 1.25rem;
+  box-shadow: 0 8px 26px rgba(0,0,0,.06);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  padding-left: 3.25rem;         /* room for node + spine */
 }
 
-/* Professional bullets (dot with subtle ring) */
-.xp-bullets{
-  margin:.9rem 0 0;
-  padding-left:0;
-  list-style:none;
-}
-.xp-bullets li{
-  position:relative;
-  padding:.42rem 0 .42rem 1.25rem;
-}
-.xp-bullets li::before{
-  content:"";
-  position:absolute;
-  left:0; top: calc(.42rem + .35rem);
-  width:6px; height:6px;
-  border-radius:50%;
-  background: color-mix(in oklab, var(--btn) 85%, white);
-  box-shadow: 0 0 0 2px color-mix(in oklab, var(--btn) 18%, transparent);
+/* Node on the spine */
+.xp-item::before{
+  content: "";
+  position: absolute;
+  left: 14px; top: 1.25rem;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--panel, #fff);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--btn) 70%, black);
 }
 
-/* Optional hover (desktop only) */
+/* Hover */
 @media (hover:hover){
-  .xp-card:hover,
-  .xp-card:focus-within{
-    transform: translateY(-6px);
-    border-color: color-mix(in oklab, var(--btn) 35%, var(--line));
-    box-shadow: 0 18px 44px rgba(0,0,0,.14);
-  }
+  .xp-item:hover{ transform: translateY(-3px); box-shadow: 0 14px 34px rgba(0,0,0,.10); }
 }
 
-/* “CURRENT” pill for ongoing roles (JS adds .current) */
-.xp-card.current::after{
-  content:"CURRENT";
-  position:absolute; top:10px; right:12px;
-  font-size:.7rem; font-weight:700;
-  letter-spacing:.6px;
-  padding:.2rem .4rem;
-  border-radius:999px;
+/* Header */
+.xp-header{
+  display: grid;
+  gap: .35rem;
+  margin-bottom: .6rem;
+  border-bottom: 1px dashed color-mix(in oklab, var(--line) 70%, transparent);
+  padding-bottom: .65rem;
+}
+.xp-role{
+  font-weight: 700;
+  font-size: clamp(1.05rem, 1.2vw, 1.25rem);
+  letter-spacing: .2px;
+  line-height: 1.25;
+}
+.xp-meta{
+  display: flex; flex-wrap: wrap;
+  gap: .75rem 1rem;
+  font-size: .96rem;
+  opacity: .95;
+}
+.xp-org, .xp-date{ display: inline-flex; align-items: center; gap: .4rem; }
+.xp-meta .bi{ font-size: 1.05em; color: currentColor; }
+
+/* Bullets */
+.xp-points{
+  list-style: none;
+  margin: .25rem 0 0;
+  padding: 0;
+  display: grid; gap: .45rem;
+  font-size: 1rem; line-height: 1.55;
+}
+.xp-points li{
+  position: relative;
+  padding-left: 1.15rem;
+}
+.xp-points li::before{
+  content: "";
+  position: absolute;
+  left: 0; top: .62em;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: color-mix(in oklab, var(--btn) 80%, white);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--btn) 20%, transparent);
+}
+
+/* Variants */
+.xp-item.current::after{
+  content: "CURRENT";
+  position: absolute; top: .6rem; right: .7rem;
+  font-size: .7rem; font-weight: 800; letter-spacing: .6px;
+  padding: .18rem .42rem; border-radius: 999px;
   background: color-mix(in oklab, var(--btn) 88%, white);
   color: #fff;
 }
+.xp-item.edu::before{ box-shadow: 0 0 0 3px color-mix(in oklab, #3366ff 70%, black); } /* node color for education */
 
-/* ===== Timeline layout — single column + dotted spine (FINAL) ===== */
-.xp-cards.timeline{
-  position: relative;
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: 1fr !important; /* force single column on all widths */
-}
-
-/* Dotted vertical spine */
-.xp-cards.timeline::before{
-  content:"";
-  position:absolute; left:18px; top:0; bottom:0; width:2px;
+/* Dark mode spine visibility (optional) */
+html[data-theme="dark"] .xp-timeline::before{
+  opacity: .9;
   background:
-    radial-gradient(
-      color-mix(in oklab, var(--ink) 35%, transparent) 2px,
-      transparent 2.5px
-    ) 50% 0 / 2px 16px repeat-y;
+    radial-gradient(color-mix(in oklab, var(--ink) 55%, transparent) 2px, transparent 3px)
+    0 0 / 2px 16px repeat-y;
 }
 
-/* Card adjustments for timeline mode */
-.xp-cards.timeline .xp-card{
-  padding-left: 2.5rem;           /* make room for spine + node */
-}
+/* Responsive width container (optional, if you have a .container elsewhere) */
+.xp-section .container,
+.xp-section{ max-width: 1100px; margin-inline: auto; }
 
-/* Hide card’s own accent rail so we don’t double up */
-.xp-cards.timeline .xp-card::before{
-  display:none;
-}
-
-/* Node marker on each card (sits on the spine) */
-.xp-cards.timeline .xp-card::after{
-  content:"";
-  position:absolute; left: 11px; top: 22px;
-  width:14px; height:14px; border-radius:50%;
-  background: var(--panel);
-  box-shadow: 0 0 0 2px color-mix(in oklab, var(--btn) 80%, black);
-}
 
 /* Dark mode: slightly stronger dots */
 html[data-theme="dark"] .xp-cards.timeline::before{
@@ -902,19 +886,390 @@ html[data-theme="dark"] .capsule:hover{
   padding-left: .85rem; padding-right: .85rem;
 }
 
+/* Ensure the icon always matches surrounding text */
+.sub,
+.sub .bi{
+  color: inherit;          /* inherit from parent text color */
+}
+
+/* Optional: if your buttons/links contain icons, make them match too */
+.btn .bi,
+a .bi{
+  color: currentColor;     /* same as the text color of the element */
+}
+
+/* (Nice-to-have) align & space the icon with the text */
+.sub{
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+/* ================================
+   Alternating Left/Right Timeline
+   (centered logo, collapsed by default, no caret)
+================================ */
+.lr-section{
+  /* removed old per-section padding to defer to global spacing */
+  max-width: 1200px;           /* a bit wider to fit wider cards */
+  margin-inline:auto;
+}
+
+.lr-section .section-title{
+  text-align:center;
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-weight: 700;
+  margin: 0 0 1.25rem 0;       /* tidier spacing above the timeline */
+  color: var(--ink);
+}
+
+/* spine */
+.lr-timeline{
+  list-style:none; margin:0; padding:0; position:relative;
+  /* slight top breathing room under the title */
+  padding-top: .25rem;
+}
+.lr-timeline::before{
+  content:"";
+  position:absolute; top:0; bottom:0; left:50%;
+  width:2px; transform: translateX(-50%);
+  background:
+    radial-gradient(color-mix(in oklab, var(--ink) 35%, transparent) 2px, transparent 3px)
+    0 0 / 2px 16px repeat-y;
+  opacity:.65;
+}
+
+/* items alternate sides on desktop */
+.lr-item{ position:relative; margin: 1rem 0; }
+.lr-card{
+  width: min(600px, calc(50% - 32px)); /* wider cards */
+  background: var(--panel, #fff);
+  border:1px solid var(--line, rgba(0,0,0,.14));
+  border-radius:16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+  padding: 0; /* summary/panel handle their own padding */
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  overflow: clip;
+}
+@media (hover:hover){
+  .lr-card:hover{ transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,0,0,.10); }
+}
+
+.lr-item:nth-child(odd) .lr-card{ margin-right:auto; }
+.lr-item:nth-child(even) .lr-card{ margin-left:auto; }
+
+/* node dot on the spine */
+.lr-item::after{
+  content:"";
+  position:absolute; left:50%; top: 22px; transform: translate(-50%, 0);
+  width:16px; height:16px; border-radius:50%;
+  background: var(--panel, #fff);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--btn) 70%, black);
+}
+
+/* remove the spine-pointer “triangle” entirely */
+.lr-card::before{ content:none !important; }
+
+/* summary row — stacked, centered */
+.lr-summary{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align:center;
+  gap: .5rem;
+  padding: 1rem 1rem .85rem;
+  cursor: pointer;
+}
+/* hide default details marker in all browsers */
+.lr-summary::-webkit-details-marker{ display: none; }
+.lr-summary::marker{ content:""; }
+
+/* Logo chip (circle) with per-logo controls */
+.lr-logo{
+  --logo-d: 54px;           /* chip diameter */
+  --logo-pad: 6px;          /* inner padding */
+  --logo-scale: 1;          /* zoom (1 = none) */
+  --logo-pos-x: 50%;        /* object-position controls */
+  --logo-pos-y: 50%;
+  --logo-shift-x: 0px;      /* fine translation AFTER scaling */
+  --logo-shift-y: 0px;
+
+  width: var(--logo-d);
+  height: var(--logo-d);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--line, rgba(0,0,0,.14));
+  background: var(--panel);
+  box-sizing: border-box;
+}
+
+.lr-logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* key: never crop */
+  object-position: var(--logo-pos-x) var(--logo-pos-y);
+  padding: var(--logo-pad);
+  transform: translate(var(--logo-shift-x), var(--logo-shift-y)) scale(var(--logo-scale));
+  transform-origin: 50% 50%;
+  display: block;
+}
 
 
+/* Handy presets if you prefer classes over inline vars */
+.lr-logo.wide { --logo-pad: 10px; }       /* very horizontal logos */
+.lr-logo.tall { --logo-pad: 4px; --logo-scale: 1.08; } /* very vertical marks */
 
-.hero .hero-blurb{
-  max-width: 38ch;          /* tighten or loosen: 34–48ch */
-  margin: .75rem auto 0;    /* centered block */
-  line-height: 1.7;
-  text-align: justify;      /* even edges */
-  text-justify: inter-word; /* better word spacing */
-  hyphens: auto;            /* allow hyphen breaks */
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
+
+/* title + org */
+.lr-title{ min-width:0; }
+.lr-role{
+  display:block; font-weight:700;
+  font-size: clamp(1.05rem, 1.2vw, 1.3rem);
+  line-height:1.25;
+}
+.lr-org{ opacity:.95; font-size:.98rem; }
+
+/* meta line (date · location), centered */
+.lr-meta{
+  display:flex; align-items:center; gap:.6rem; flex-wrap:wrap;
+  font-size:.95rem; opacity:.9;
+}
+.lr-sep{ opacity:.4; }
+
+/* expanded panel */
+.lr-panel{
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .25s ease, opacity .25s ease;
+  opacity: 0;
+}
+.lr-card[open] .lr-panel{
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.lr-panel-inner{
+  overflow: hidden;           /* enables the 0fr → 1fr trick */
+  padding: .75rem 1rem 1rem;
+  text-align: left;
+}
+
+/* description + bullets */
+.lr-desc{ margin:.25rem 0 .4rem 0; line-height:1.55; }
+.lr-points{
+  list-style:none; padding:0; margin:0; display:grid; gap:.35rem;
+  font-size:1rem; line-height:1.55;
+}
+.lr-points li{ position:relative; padding-left:1.05rem; }
+.lr-points li::before{
+  content:""; position:absolute; left:0; top:.62em;
+  width:6px; height:6px; border-radius:50%;
+  background: color-mix(in oklab, var(--btn) 80%, white);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--btn) 20%, transparent);
+}
+
+/* tag chips */
+.lr-chips{ display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.55rem; }
+.chip{
+  font-size:.75rem; line-height:1; padding:.28rem .5rem;
+  border-radius:999px;
+  border:1px solid var(--line, rgba(0,0,0,.14));
+  background: color-mix(in oklab, var(--panel) 90%, white);
+  color: color-mix(in oklab, var(--ink) 85%, transparent);
+}
+
+/* CURRENT pill — top-right inside the card */
+.lr-item.current .lr-card::after{
+  content:"CURRENT";
+  position:absolute; top:.5rem; right:.6rem;
+  font-size:.68rem; font-weight:800; letter-spacing:.6px;
+  padding:.18rem .42rem; border-radius:999px; white-space:nowrap;
+  background: color-mix(in oklab, var(--btn) 88%, white); color:#fff;
+}
+
+/* education node color variant (optional) */
+.lr-item.edu::after{ box-shadow: 0 0 0 3px color-mix(in oklab, #3366ff 70%, black); }
+
+/* mobile: single column, spine shifts left */
+@media (max-width: 780px){
+  .lr-timeline::before{ left: 28px; transform:none; }
+  .lr-card{ width: auto; margin-left: 60px; }
+  .lr-item:nth-child(even) .lr-card{ margin-left: 60px; } /* both sides same */
+  .lr-item::after{ left: 28px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .lr-card{ transition: none; }
+  .lr-panel{ transition: none; }
+}
+
+/* ===== Experience card: light grey gradient background ===== */
+.lr-card{
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--panel) 92%, #eeeeee) 0%,
+    color-mix(in oklab, var(--panel) 86%, #dddddd) 100%
+  );
+}
+
+/* Dark theme: subtle dark gradient */
+html[data-theme="dark"] .lr-card{
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--panel) 96%, #000) 0%,
+    color-mix(in oklab, var(--panel) 90%, #000) 100%
+  );
+}
+
+/* ===== Combine description + points into one box (no HTML change) ===== */
+/* Top half of the group (description) */
+.lr-desc{
+  margin: .6rem 0 0;                 /* sits right under the summary */
+  padding: .85rem 1rem;
+  border: 1px solid var(--line);
+  border-bottom: 0;                   /* join with the list below */
+  border-radius: 12px 12px 0 0;       /* rounded top only */
+  background: color-mix(in oklab, var(--panel) 96%, white);
+  line-height: 1.6;
+}
+
+/* Bottom half of the group (points) */
+.lr-points{
+  margin: 0 0 .25rem;                 /* closes the group */
+  padding: .5rem .85rem;
+  border: 1px solid var(--line);
+  border-top: 0;                      /* shares border with desc */
+  border-radius: 0 0 12px 12px;       /* rounded bottom only */
+  background: color-mix(in oklab, var(--panel) 98%, white);
+  display: grid;
+  gap: 0;                              /* we’ll use separators instead */
+}
+
+
+/* Dark theme polish for the group */
+html[data-theme="dark"] .lr-desc{
+  background: color-mix(in oklab, var(--panel) 88%, black);
+}
+html[data-theme="dark"] .lr-points{
+  background: color-mix(in oklab, var(--panel) 92%, black);
+}
+
+/* ===== Chips: center only (keep current look) ===== */
+.lr-chips{
+  justify-content: center;   /* center line */
+  margin-top: .85rem;
+}
+
+/* === Baseline-aligned bullets using native markers === */
+.lr-points{
+  list-style: disc outside;                 /* use real bullets */
+  padding: .5rem 1rem .5rem 1.25rem;        /* left indent for marker */
+  display: grid;
+  gap: 0;                                   /* keep your row separators tidy */
+}
+
+.lr-points li{
+  padding-left: 0;                           /* no extra indent */
+}
+
+.lr-points li::before{
+  content: none !important;                  /* kill any custom bullet */
+}
+
+
+/* Optional: ensure marker uses text color */
+.lr-points li::marker{
+  color: currentColor;
 }
 
 
 
+/* Larger vertical padding so each band breathes */
+.section{
+  padding-block: clamp(4rem, 10vh, 8rem); /* bigger than --space-8 */
+}
+
+/* Add a large gap between sections */
+.section + .section{
+  margin-block-start: clamp(3rem, 8vh, 6rem);
+  border-top: 1px solid var(--line);          /* subtle divider */
+  scroll-margin-top: 6rem; /* nicer anchor jumps if using a navbar */
+}
+
+/* Optional: alternate backgrounds for contrast */
+.section:nth-of-type(odd){ background: #fff; }
+.section:nth-of-type(even){ background: var(--bg); }
+
+/* Optional: angled/soft separator look */
+.section + .section{
+  background:
+    linear-gradient(to bottom, transparent 0, transparent 24px, rgba(0,0,0,.06) 25px, transparent 26px) no-repeat;
+  background-size: 100% 26px;
+}
+
+
+/* === Pattern A: Sections own vertical space (standardize spacing) === */
+
+/* 1) Containers = width + horizontal padding only */
+.container{
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-inline: 1rem;  /* keep horizontal padding */
+  padding-block: 0;      /* remove vertical padding from container */
+}
+
+/* 2) Global spacing knobs (edit these two to adjust the whole site) */
+:root{
+  --section-pad: clamp(4.5rem, 12vh, 8rem);   /* more inner padding per section */
+  --section-gap: clamp(3rem, 10vh, 7rem); /* larger gap between sections */
+  --stack-gap: var(--space-5);
+}
+
+
+/* 3) Normalize your existing sections to use the same system */
+:where(.hero.section-screen,
+       .skills-section,
+       .lr-section,
+       .contact-section){
+  padding-block: var(--section-pad) !important;  /* unify vertical padding */
+  margin: 0;                                     /* clear ad-hoc margins */
+  border-top: 0;
+}
+
+:where(.hero.section-screen,
+       .skills-section,
+       .lr-section,
+       .contact-section):not(:first-of-type){
+  margin-block-start: var(--section-gap);
+  border-top: 0; /* no divider */
+}
+
+
+/* 5) Keep inner vertical rhythm consistent everywhere */
+.stack > * + *{ margin-top: var(--stack-gap); }
+
+/* === Global section spacing applied to ALL pages === */
+main.container > :where(section, article, .section-block, .about-page){
+  padding-block: var(--section-pad) !important;  /* inner spacing for top blocks */
+  margin: 0;
+}
+
+main.container > :where(section, article, .section-block, .about-page):not(:first-child){
+  margin-block-start: var(--section-gap) !important;        /* space between top blocks */
+  /* no divider line */
+}
+
+/* Page-level spacing presets (switch with a <body> class) */
+.page-cozy{
+  --section-pad: clamp(3.5rem, 9vh, 6.5rem);
+  --section-gap: clamp(2.5rem, 8vh, 5.5rem);
+}
+.page-standard{
+  --section-pad: clamp(4.5rem, 12vh, 8rem);
+  --section-gap: clamp(3rem, 10vh, 7rem);
+}
+.page-spacious{
+  --section-pad: clamp(6rem, 16vh, 11rem);
+  --section-gap: clamp(4rem, 14vh, 9rem);
+}

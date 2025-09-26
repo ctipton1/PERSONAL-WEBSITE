@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Contact — Chance Tipton</title>
+<title>Thanks — Chance Tipton</title>
 <link rel="icon" href="/favicon.ico" />
 <link rel="stylesheet" href="/css/style.css" />
 <meta name="color-scheme" content="light dark">
@@ -20,12 +20,10 @@
     <a class="active" href="/contact.html" data-nav>Contact</a>
   </nav>
   <button id="theme-toggle" class="btn" aria-pressed="false" style="margin-left:.5rem;">
-    <!-- Moon (shown in LIGHT mode) -->
     <svg class="icon icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
          viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
     </svg>
-    <!-- Sun (shown in DARK mode) -->
     <svg class="icon icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
          viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <circle cx="12" cy="12" r="5"/>
@@ -37,38 +35,17 @@
 
 <main class="container">
   <section class="contact-section">
-    <h1 class="section-title">Contact</h1>
-    <p>Prefer email? <a class="text-link" href="mailto:chancetipton02@icloud.com">chancetipton02@icloud.com</a></p>
-
-    <form class="card form" name="contact" method="POST"
-      data-netlify="true" data-netlify-honeypot="bot-field"
-      action="/thanks.html">
-  <input type="hidden" name="form-name" value="contact" />
-
-  <!-- Netlify honeypot (hidden from humans) -->
-  <label style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;">
-    Don’t fill this out if you’re human:
-    <input name="bot-field" tabindex="-1" autocomplete="off" />
-  </label>
-
-  <label for="name">
-    <span>Name</span>
-    <input id="name" type="text" name="name" autocomplete="name" required />
-  </label>
-
-  <label for="email">
-    <span>Email</span>
-    <input id="email" type="email" name="email" autocomplete="email" required />
-  </label>
-
-  <label for="message">
-    <span>Message</span>
-    <textarea id="message" name="message" rows="6" required></textarea>
-  </label>
-
-  <button class="btn" type="submit">Send</button>
-</form>
-
+    <h1 class="section-title">Thanks!</h1>
+    <div class="card" role="status" aria-live="polite">
+      <p>Got it — your message has been received. I’ll get back to you soon.</p>
+      <p>If it’s urgent, email me directly at
+        <a class="text-link" href="mailto:chancetipton02@icloud.com">chancetipton02@icloud.com</a>.
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="/">Back to Home</a>
+        <a class="text-link" href="/contact.html">Send another message</a>
+      </div>
+    </div>
   </section>
 </main>
 

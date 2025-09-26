@@ -7,59 +7,200 @@
 <link rel="icon" href="/favicon.ico" />
 <link rel="stylesheet" href="/css/style.css" />
 <meta name="color-scheme" content="light dark">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<!-- Page-scoped styles (minimal; uses your tokens/classes) -->
+<style>
+  /* ===== Quote Band (Option 2) ===== */
+  .quote-band{
+    background: color-mix(in oklab, var(--panel) 92%, var(--bg));
+    border-block: 1px solid var(--line);
+  }
+  .quote-band .band-quote{
+    max-width: 65ch;
+    margin: 0 auto;
+    font-style: italic;
+    line-height: 1.65;
+    font-size: clamp(1rem, 1.2vw, 1.15rem);
+    color: var(--ink);
+  }
+  .quote-band .band-quote cite{
+    display: block;
+    margin-top: .6rem;
+    opacity: .8;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  
+  /* ===== Reading List ===== */
+  .reading-list .section-title{
+    text-align:center;
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    font-weight: 700;
+    margin: 0 auto 1.25rem;
+  }
+  .book-card{
+    display:grid; gap:.75rem; padding: 1rem;
+  }
+  .book-card img{
+    width:100%; aspect-ratio: 2/3; object-fit: cover; border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .book-title{ font-weight: 700; line-height:1.3 }
+  .book-author{ opacity:.9; font-size:.95rem }
+  .book-meta{ opacity:.7; font-size:.85rem }
+</style>
 </head>
 
-<body>
+<body class="page-standard">
 <header class="site-header">
-<a class="logo" href="/">Chance Tipton</a>
-<nav class="nav">
-<a href="/index.html" data-nav>Home</a>
-<a class="active" href="/about.html" data-nav>About</a>
-<a href="/portfolio.html" data-nav>Portfolio</a>
-<a href="/certificates.html" data-nav>Certificates</a>
-<a href="/contact.html" data-nav>Contact</a>
-</nav>
-<button id="theme-toggle" class="btn" aria-pressed="false" style="margin-left:.5rem;">
-<svg class="icon icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-       viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-  </svg>
-  <!-- Sun (shown in DARK mode) -->
-  <svg class="icon icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-       viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <circle cx="12" cy="12" r="5"/>
-    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-  </svg>
-</button>
+  <a class="logo" href="/">Chance Tipton</a>
+  <nav class="nav">
+    <a href="/index.html" data-nav>Home</a>
+    <a class="active" href="/about.html" data-nav>About</a>
+    <a href="/portfolio.html" data-nav>Portfolio</a>
+    <a href="/certificates.html" data-nav>Certificates</a>
+    <a href="/contact.html" data-nav>Contact</a>
+  </nav>
+  <button id="theme-toggle" class="btn" aria-pressed="false" style="margin-left:.5rem;">
+    <svg class="icon icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+         viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+    </svg>
+    <svg class="icon icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+         viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <circle cx="12" cy="12" r="5"/>
+      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    </svg>
+  </button>
   <button class="nav-toggle" aria-label="Toggle menu">☰</button>
 </header>
 
+<main class="container prose">
+  <!-- ===== INTRO CARD (unchanged) ===== -->
+  <section class="about-page" id="about">
+    <h1 class="about-title">About</h1>
+
+    <div class="card about-card">
+      <p>
+        Hi, my name is Chance Tipton. I am an aspiring investor, small business owner, and finance/tech enthusiast. 
+        I recently graduated from Georgia College &amp; State University with a BBA in Management Information Systems, 
+        where I developed a strong foundation in technology, data, and problem-solving.
+      </p>
+      <p>
+        Beyond my career interests, I enjoy spending time outdoors, hunting, fishing, and exploring new places to keep me 
+        grounded and balanced. I’m also deeply interested in personal finance and long-term wealth building, 
+        especially through real estate and the stock market.
+      </p>
+      <p>
+        What drives me most is the idea of building something lasting—whether that’s a business, a property portfolio, 
+        or a new project that helps others. I value continuous learning, discipline, and taking on challenges that 
+        push me forward both professionally and personally.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== QUOTE BAND (Option 2) ===== -->
+  <section class="quote-band" aria-label="Favorite quote">
+    <div class="container">
+      <blockquote class="band-quote">
+        “It is not the critic who counts: not the man who points out how the strong man stumbles or where the
+        doer of deeds could have done better. The credit belongs to the man who is actually in the arena, whose
+        face is marred by dust and sweat and blood, who strives valiantly, who errs and comes up short again and
+        again, because there is no effort without error or shortcoming; but who knows the great enthusiasms, the
+        great devotions; who spends himself in a worthy cause; who, at the best, knows, in the end, the triumph
+        of high achievement, and who, at the worst, if he fails, at least he fails while daring greatly, so that
+        his place shall never be with those cold and timid souls who knew neither victory nor defeat.”
+        <cite>— Theodore Roosevelt</cite>
+      </blockquote>
+    </div>
+  </section>
 
 
-<main class="container prose about-page">
-  <h1 class="about-title">About</h1>
+  <!-- ===== READING LIST — its own section ===== -->
+  <section class="reading-list" aria-label="Reading list">
+    <h2 class="section-title">Reading List</h2>
+    <div class="grid three">
+      <!-- Book card 1 -->
+      <article class="card book-card">
+        <img src="/images/books/walden.jpg" alt="Walden cover">
+        <div>
+          <div class="book-title">Walden</div>
+          <div class="book-author">Henry David Thoreau</div>
+          <div class="book-meta">Reflections on simple living</div>
+        </div>
+      </article>
 
-  <div class="card about-card">
-    <p>
-      Hi, my name is Chance Tipton. I am an aspiring investor, small business owner, and tech enthusiast. 
-      I recently graduated from Georgia College &amp; State University with a BBA in Management Information Systems, 
-      where I developed a strong foundation in technology, data, and problem-solving.
-    </p>
-    <p>
-      Beyond my career interests, I enjoy spending time outdoors—hunting, fishing, and exploring new places keep me 
-      grounded and balanced. I’m also deeply interested in personal finance and long-term wealth building, 
-      especially through real estate and the stock market.
-    </p>
-    <p>
-      What drives me most is the idea of building something lasting—whether that’s a business, a property portfolio, 
-      or a new project that helps others. I value continuous learning, discipline, and taking on challenges that 
-      push me forward both professionally and personally.
-    </p>
-  </div>
+      <!-- Book card 2 -->
+      <article class="card book-card">
+        <img src="/images/books/rich-dad.jpg" alt="Rich Dad Poor Dad cover">
+        <div>
+          <div class="book-title">Rich Dad Poor Dad</div>
+          <div class="book-author">Robert T. Kiyosaki</div>
+          <div class="book-meta">Money mindset &amp; cashflow</div>
+        </div>
+      </article>
+
+      <!-- Book card 3 -->
+      <article class="card book-card">
+        <img src="/images/books/ittakeswhatittakes.jpg" alt="It Takes What It Takes cover">
+        <div>
+          <div class="book-title">It Takes What It Takes</div>
+          <div class="book-author">Trevor Moawad</div>
+          <div class="book-meta">Mindset, habits, action</div>
+        </div>
+      </article>
+
+      <!-- Book card 4 -->
+      <article class="card book-card">
+        <img src="/images/books/atomichabits.jpg" alt="Atomic Habits cover">
+        <div>
+          <div class="book-title">Atomic Habits</div>
+          <div class="book-author">James Clear</div>
+          <div class="book-meta">Tiny changes, remarkable results</div>
+        </div>
+      </article>
+      <!-- Book card 5 -->
+      <article class="card book-card">
+        <img src="/images/books/thinkandgrowrich.jpg" alt="Think and Grow Rich cover">
+        <div>
+          <div class="book-title">Think and Grow Rich</div>
+          <div class="book-author">Napoleon Hill</div>
+          <div class="book-meta">Philosophy of success</div>
+        </div>
+      </article>
+      <!-- Book card 6 -->
+      <article class="card book-card">
+        <img src="/images/books/alchemist.jpg" alt="The Alchemist cover">
+        <div>
+          <div class="book-title">The Alchemist</div>
+          <div class="book-author">Paulo Coelho</div>
+          <div class="book-meta">A journey of self-discovery</div>
+        </div>
+      </article>
+      <!-- Book card 7 -->
+      <article class="card book-card">
+        <img src="/images/books/empire.jpg" alt="Empire of the Summer Moon cover">
+        <div>
+          <div class="book-title">Empire of the Summer Moon</div>
+          <div class="book-author">S.C. Gwynne</div>
+          <div class="book-meta">The rise and fall of the Comanches</div>
+        </div>
+      </article>
+      <!-- Book card 6 -->
+      <article class="card book-card">
+        <img src="/images/books/divinecomedy.jpg" alt="Divine Comedy cover">
+        <div>
+          <div class="book-title">Divine Comedy</div>
+          <div class="book-author">Dante Alighieri</div>
+          <div class="book-meta">Epic poem of the afterlife</div>
+        </div>
+      </article>
+    </div>
+  </section>
 </main>
 
 
-<script src="/js/script.js"></script>
 </body>
 </html>
