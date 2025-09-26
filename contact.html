@@ -40,34 +40,28 @@
     <h1 class="section-title">Contact</h1>
     <p>Prefer email? <a class="text-link" href="mailto:chancetipton02@icloud.com">chancetipton02@icloud.com</a></p>
 
-    <form class="card form" name="contact" method="POST"
-      data-netlify="true" data-netlify-honeypot="bot-field"
-      action="/thanks.html">
-  <input type="hidden" name="form-name" value="contact" />
-
-  <!-- Netlify honeypot (hidden from humans) -->
-  <label style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;">
-    Don’t fill this out if you’re human:
-    <input name="bot-field" tabindex="-1" autocomplete="off" />
-  </label>
-
-  <label for="name">
+    <form action="https://formspree.io/f/mqayawez" method="POST" class="card form">
+  <label>
     <span>Name</span>
-    <input id="name" type="text" name="name" autocomplete="name" required />
+    <input type="text" name="name" required />
   </label>
-
-  <label for="email">
+  <label>
     <span>Email</span>
-    <input id="email" type="email" name="email" autocomplete="email" required />
+    <input type="email" name="_replyto" required />
   </label>
-
-  <label for="message">
+  <label>
     <span>Message</span>
-    <textarea id="message" name="message" rows="6" required></textarea>
+    <textarea name="message" rows="6" required></textarea>
   </label>
+  
+  <!-- Optional but useful -->
+  <input type="hidden" name="_subject" value="New message from your website!" />
+  <input type="hidden" name="_captcha" value="false">
 
   <button class="btn" type="submit">Send</button>
 </form>
+
+
 
   </section>
 </main>
