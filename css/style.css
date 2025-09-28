@@ -1273,3 +1273,8 @@ main.container > :where(section, article, .section-block, .about-page):not(:firs
   --section-pad: clamp(6rem, 16vh, 11rem);
   --section-gap: clamp(4rem, 14vh, 9rem);
 }
+
+
+.portfolio-section .section-title {
+  text-align: center;
+}

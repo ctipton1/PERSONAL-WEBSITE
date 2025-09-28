@@ -8,60 +8,57 @@
 <link rel="stylesheet" href="/css/style.css" />
 <meta name="color-scheme" content="light dark">
 </head>
-<body>
-<header class="site-header">
-<a class="logo" href="/">Chance Tipton</a>
-<nav class="nav">
-<a href="/index.html" data-nav>Home</a>
-<a href="/about.html" data-nav>About</a>
-<a href="/portfolio.html" data-nav>Portfolio</a>
-<a class="active" href="/certificates.html" data-nav>Certificates</a>
-<a href="/contact.html" data-nav>Contact</a>
-</nav>
-<button id="theme-toggle" class="btn" aria-pressed="false" style="margin-left:.5rem;">
-<svg class="icon icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-       viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-  </svg>
 
-  <!-- Sun (shown in DARK mode) -->
-  <svg class="icon icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-       viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <circle cx="12" cy="12" r="5"/>
-    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-  </svg>
-</button>
+<body class="page-standard">
+<header class="site-header">
+  <a class="logo" href="/">Chance Tipton</a>
+  <nav class="nav">
+    <a href="/index.html" data-nav>Home</a>
+    <a href="/about.html" data-nav>About</a>
+    <a href="/portfolio.html" data-nav>Portfolio</a>
+    <a class="active" href="/certificates.html" data-nav>Certificates</a>
+    <a href="/contact.html" data-nav>Contact</a>
+  </nav>
+  <button id="theme-toggle" class="btn" aria-pressed="false" style="margin-left:.5rem;">
+    <!-- Moon (shown in LIGHT mode) -->
+    <svg class="icon icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+         viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+    </svg>
+    <!-- Sun (shown in DARK mode) -->
+    <svg class="icon icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+         viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <circle cx="12" cy="12" r="5"/>
+      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    </svg>
+  </button>
   <button class="nav-toggle" aria-label="Toggle menu">☰</button>
 </header>
 
-
 <main class="container">
-<h1>Certificates</h1>
-<p class="sub">LinkedIn Learning badges and other credentials.</p>
+  <section class="certificates-section">
+    <h1 class="section-title">Certificates</h1>
+    <p class="sub">LinkedIn Learning badges and other credentials.</p>
 
+    <div class="grid two">
+      <article class="card cert">
+        <img src="/images/cert-placeholder.png" alt="Certificate badge" />
+        <div>
+          <h3>Coming soon</h3>
+          <p>Certificates will be displayed here.</p>
+        </div>
+      </article>
 
-<section class="grid two">
-<article class="card cert">
-<img src="/images/cert-placeholder.png" alt="Certificate badge" />
-<div>
-<h3>Course / Credential Name</h3>
-<p>Provider • Issued YYYY-MM</p>
-<a class="text-link" href="#" target="_blank" rel="noopener">Verify credential →</a>
-</div>
-</article>
-
-
-<article class="card cert">
-<img src="/images/cert-placeholder.png" alt="Certificate badge" />
-<div>
-<h3>Course / Credential Name</h3>
-<p>Provider • Issued YYYY-MM</p>
-<a class="text-link" href="#" target="_blank" rel="noopener">Verify credential →</a>
-</div>
-</article>
-</section>
+      <article class="card cert">
+        <img src="/images/cert-placeholder.png" alt="Certificate badge" />
+        <div>
+          <h3>Coming soon</h3>
+          <p>Certificates will be displayed here.</p>
+        </div>
+      </article>
+    </div>
+  </section>
 </main>
-
 
 <script src="/js/script.js"></script>
 </body>
