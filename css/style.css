@@ -1274,7 +1274,17 @@ main.container > :where(section, article, .section-block, .about-page):not(:firs
   --section-gap: clamp(4rem, 14vh, 9rem);
 }
 
-
 .portfolio-section .section-title {
   text-align: center;
 }
+
+/* Center the Certificates page heading (and subtitle) */
+.certificates-section > .section-title {
+  text-align: center;
+}
+.certificates-section p.sub {
+  text-align: center !important;
+}
+
+
+
